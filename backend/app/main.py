@@ -8,6 +8,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from fastapi.middleware.cors import CORSMiddleware
+import logging
+logging.basicConfig(level=logging.INFO)
 
 try:
     from dotenv import load_dotenv
@@ -140,6 +142,7 @@ def login(form: OAuth2PasswordRequestForm = Depends()):
         data={"sub": user.username, "role": user.role},
         expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     )
+    logging.info(f"User '{user.username}' logged in successfully.")
     return {"access_token": access_token, "token_type": "bearer"}
 
 @app.get("/me", response_model=User, summary="Get current user profile")
@@ -159,3 +162,6 @@ def search(
     ProviderClass = get_provider(provider)
     results = ProviderClass.search(query, num_results)
     return {"results": results}
+# Force redeploy: test CORS
+
+# CORS redeploy attempt 2
