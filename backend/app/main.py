@@ -103,6 +103,10 @@ def require_premium(user: User = Depends(get_current_user)):
 # --- FastAPI App and Endpoints ---
 app = FastAPI(title="Codeflow Execution Backend")
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to your FastAPI backend!"}
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
