@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import SearchForm from './SearchForm';
 
 function App() {
   const [health, setHealth] = useState<string | null>(null);
@@ -69,11 +70,14 @@ function App() {
             {health ? <b className="health-ok">{health}</b> : error ? <b className="health-error">{error}</b> : 'Loading...'}
           </p>
           {profile ? (
-            <div className="profile">
-              <h2>Profile</h2>
-              <p><b>Username:</b> {profile.username}</p>
-              <p><b>Role:</b> {profile.role}</p>
-            </div>
+            <>
+              <div className="profile">
+                <h2>Profile</h2>
+                <p><b>Username:</b> {profile.username}</p>
+                <p><b>Role:</b> {profile.role}</p>
+              </div>
+              <SearchForm token={token} />
+            </>
           ) : (
             <p>Loading profile...</p>
           )}
