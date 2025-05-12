@@ -103,6 +103,16 @@ def require_premium(user: User = Depends(get_current_user)):
 # --- FastAPI App and Endpoints ---
 app = FastAPI(title="Codeflow Execution Backend")
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Only allow your local frontend
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to your FastAPI backend!"}
