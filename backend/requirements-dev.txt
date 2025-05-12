@@ -1,0 +1,4 @@
+# Development requirements for backend
+-r requirements.txt
+flake8==7.2.0
+pytest==8.2.0
